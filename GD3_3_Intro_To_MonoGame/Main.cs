@@ -74,6 +74,7 @@ namespace GDLibrary
         {
             //default shader provided by MonoGame
             effect = new BasicEffect(_graphics.GraphicsDevice);
+            effect.VertexColorEnabled = true;
         }
 
         private void InitializeVertices()
@@ -122,7 +123,6 @@ namespace GDLibrary
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            //     System.Diagnostics.Debug.WriteLine("Draw");
 
             //set variables on the shader
             effect.World = Matrix.Identity;
