@@ -131,7 +131,7 @@ namespace GDLibrary
                 Exit();
 
             rotationInDegrees += 1;
-            translation += Vector3.UnitX * 0.1f; //(0.1, 0, 0) every 1/60th sec
+            translation += Vector3.UnitX * 0.025f; //(0.1, 0, 0) every 1/60th sec
             base.Update(gameTime);
         }
 
@@ -142,9 +142,8 @@ namespace GDLibrary
             //set variables on the shader
             effect.World = Matrix.Identity
                 * Matrix.CreateScale(new Vector3(2, 4, 1))
-           //  * Matrix.CreateRotationX(MathHelper.ToRadians(60))
-           * Matrix.CreateRotationY(MathHelper.ToRadians(rotationInDegrees))
-           * Matrix.CreateTranslation(translation);
+                * Matrix.CreateTranslation(translation)
+            * Matrix.CreateRotationY(MathHelper.ToRadians(rotationInDegrees));
 
             effect.View = view;
             effect.Projection = projection;
