@@ -22,6 +22,7 @@ namespace GDLibrary
         private BasicEffect effect;
         private VertexPositionColor[] vertices;
         private float rotationInDegrees = 0;
+        private Vector3 translation = Vector3.Zero;
 
         public Main()
         {
@@ -130,6 +131,7 @@ namespace GDLibrary
                 Exit();
 
             rotationInDegrees += 1;
+            translation += Vector3.UnitX * 0.1f; //(0.1, 0, 0) every 1/60th sec
             base.Update(gameTime);
         }
 
@@ -141,7 +143,8 @@ namespace GDLibrary
             effect.World = Matrix.Identity
                 * Matrix.CreateScale(new Vector3(2, 4, 1))
            //  * Matrix.CreateRotationX(MathHelper.ToRadians(60))
-           * Matrix.CreateRotationY(MathHelper.ToRadians(rotationInDegrees));
+           * Matrix.CreateRotationY(MathHelper.ToRadians(rotationInDegrees))
+           * Matrix.CreateTranslation(translation);
 
             effect.View = view;
             effect.Projection = projection;
