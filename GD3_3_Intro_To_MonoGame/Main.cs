@@ -21,6 +21,7 @@ namespace GDLibrary
         private Matrix projection;
         private BasicEffect effect;
         private VertexPositionColor[] vertices;
+        private float rotationInDegrees = 0;
 
         public Main()
         {
@@ -81,15 +82,31 @@ namespace GDLibrary
         {
             //VertexPositionColor[]
             vertices
-                = new VertexPositionColor[2];
+                = new VertexPositionColor[6];
 
-            //left
+            //-ve x
             vertices[0] = new VertexPositionColor(
-                new Vector3(-5, 0, 0), Color.Red);
+                new Vector3(-1, 0, 0), Color.Red);
 
-            //right
+            //+ve x
             vertices[1] = new VertexPositionColor(
-                    new Vector3(5, 0, 0), Color.Green);
+                    new Vector3(1, 0, 0), Color.Green);
+
+            //+ve y
+            vertices[2] = new VertexPositionColor(
+                new Vector3(0, 1, 0), Color.Blue);
+
+            //-ve y
+            vertices[3] = new VertexPositionColor(
+                    new Vector3(0, -1, 0), Color.Orange);
+
+            //+ve z
+            vertices[4] = new VertexPositionColor(
+                new Vector3(0, 0, 1), Color.HotPink);
+
+            //-ve z
+            vertices[5] = new VertexPositionColor(
+                    new Vector3(0, 0, -1), Color.BlueViolet);
         }
 
         #endregion Initialization
@@ -109,14 +126,10 @@ namespace GDLibrary
 
         protected override void Update(GameTime gameTime)
         {
-            //     System.Diagnostics.Debug.WriteLine("Update");
-            //      System.Diagnostics.Debug.WriteLine(gameTime.ElapsedGameTime.TotalMilliseconds);
-
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-
+            rotationInDegrees += 1;
             base.Update(gameTime);
         }
 
@@ -125,7 +138,11 @@ namespace GDLibrary
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             //set variables on the shader
-            effect.World = Matrix.Identity;
+            effect.World = Matrix.Identity
+                * Matrix.CreateScale(new Vector3(2, 4, 1))
+           //  * Matrix.CreateRotationX(MathHelper.ToRadians(60))
+           * Matrix.CreateRotationY(MathHelper.ToRadians(rotationInDegrees));
+
             effect.View = view;
             effect.Projection = projection;
 
@@ -133,7 +150,8 @@ namespace GDLibrary
             effect.CurrentTechnique.Passes[0].Apply();
 
             effect.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(
-                               PrimitiveType.LineList, vertices, 0, 1);
+                               PrimitiveType.LineList,
+                               vertices, 0, 3);
 
             base.Draw(gameTime);
         }
