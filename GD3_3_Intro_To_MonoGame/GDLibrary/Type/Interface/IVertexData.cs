@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 
-namespace GDLibrary.Interfaces
+namespace GDLibrary.Type
 {
     /// <summary>
     /// Parent interface for all vertex data objects

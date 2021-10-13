@@ -1,6 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GDLibrary.Factory;
+using GDLibrary.Type;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
 
 /**
@@ -14,6 +15,8 @@ namespace GDLibrary
 {
     public class Main : Game
     {
+        #region Member Variables
+
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
@@ -23,6 +26,9 @@ namespace GDLibrary
         private VertexPositionColor[] vertices;
         private float rotationInDegrees = 0;
         private Vector3 translation = Vector3.Zero;
+        private IVertexData xAxisVertexData;
+
+        #endregion Member Variables
 
         public Main()
         {
@@ -37,16 +43,23 @@ namespace GDLibrary
             System.Diagnostics.Debug.WriteLine("Game1");
         }
 
+        #region Initialization
+
         protected override void Initialize()
         {
+            InitializeResolution(640, 480);
             InitializeCamera();
             IntializeEffect();
             InitializeVertices();
-
             base.Initialize();
         }
 
-        #region Initialization
+        private void InitializeResolution(int width, int height)
+        {
+            _graphics.PreferredBackBufferWidth = width;
+            _graphics.PreferredBackBufferHeight = height;
+            _graphics.ApplyChanges();
+        }
 
         private void InitializeCamera()
         {
@@ -81,57 +94,29 @@ namespace GDLibrary
 
         private void InitializeVertices()
         {
-            //VertexPositionColor[]
-            vertices
-                = new VertexPositionColor[6];
-
-            //-ve x
-            vertices[0] = new VertexPositionColor(
-                new Vector3(-1, 0, 0), Color.Red);
-
-            //+ve x
-            vertices[1] = new VertexPositionColor(
-                    new Vector3(1, 0, 0), Color.Green);
-
-            //+ve y
-            vertices[2] = new VertexPositionColor(
-                new Vector3(0, 1, 0), Color.Blue);
-
-            //-ve y
-            vertices[3] = new VertexPositionColor(
-                    new Vector3(0, -1, 0), Color.Orange);
-
-            //+ve z
-            vertices[4] = new VertexPositionColor(
-                new Vector3(0, 0, 1), Color.HotPink);
-
-            //-ve z
-            vertices[5] = new VertexPositionColor(
-                    new Vector3(0, 0, -1), Color.BlueViolet);
+            xAxisVertexData = VertexDataFactory.Get(VertexDataType.Line);
         }
 
         #endregion Initialization
 
+        #region Load & Unload Content
+
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            //     System.Diagnostics.Debug.WriteLine("LoadContent");
         }
 
         protected override void UnloadContent()
         {
-            //     System.Diagnostics.Debug.WriteLine("UnloadContent");
             base.UnloadContent();
         }
 
+        #endregion Load & Unload Content
+
+        #region Update & Draw
+
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-
-            rotationInDegrees += 1;
-            translation += Vector3.UnitX * 0.025f; //(0.1, 0, 0) every 1/60th sec
             base.Update(gameTime);
         }
 
@@ -140,22 +125,19 @@ namespace GDLibrary
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             //set variables on the shader
-            effect.World = Matrix.Identity
-                * Matrix.CreateScale(new Vector3(2, 4, 1))
-                * Matrix.CreateTranslation(translation)
-            * Matrix.CreateRotationY(MathHelper.ToRadians(rotationInDegrees));
-
+            effect.World = Matrix.Identity;
             effect.View = view;
             effect.Projection = projection;
 
             //load the variables (W,V,P) for use in the next draw pass
             effect.CurrentTechnique.Passes[0].Apply();
 
-            effect.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(
-                               PrimitiveType.LineList,
-                               vertices, 0, 3);
+            //draw the IVertexData object (e.g. x-axis line)
+            xAxisVertexData.Draw(gameTime, effect);
 
             base.Draw(gameTime);
         }
+
+        #endregion Update & Draw
     }
 }

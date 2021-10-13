@@ -1,4 +1,4 @@
-﻿namespace GDLibrary.Interfaces
+﻿namespace GDLibrary.Type
 {
     /// <summary>
     /// Any class implementing this interface will provide DeepClone

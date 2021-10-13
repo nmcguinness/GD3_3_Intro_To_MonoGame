@@ -1,9 +1,8 @@
-﻿using GDLibrary.Interfaces;
+﻿using GDLibrary.Type;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 
-namespace GDLibrary.Types
+namespace GDLibrary.Actor
 {
     public class VertexData<T> :
         IDeepCloneable, IVertexData where T : struct, IVertexType
