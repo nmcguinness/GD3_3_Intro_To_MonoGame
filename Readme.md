@@ -5,11 +5,11 @@
 
 ### Further Reading
 
-- Understanding [Generics](https://www.tutorialsteacher.com/csharp/csharp-generics)
-- Understanding [where](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/where-clause)
-- Understanding [sealed](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/sealed)
-- Understanding [Dictionary](https://www.tutorialsteacher.com/csharp/csharp-dictionary)
-- Understanding [out and ref](https://www.geeksforgeeks.org/difference-between-ref-and-out-keywords-in-c-sharp/)
+- Pair and VertexData - Understanding [Generics](https://www.tutorialsteacher.com/csharp/csharp-generics)  
+- VertexData - Understanding [where](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/where-clause)
+- VertexDataFactory - Understanding [sealed](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/sealed)
+- VertexDataFactory - Understanding [Dictionary](https://www.tutorialsteacher.com/csharp/csharp-dictionary)
+- VertexDataFactory - Understanding [out and ref](https://www.geeksforgeeks.org/difference-between-ref-and-out-keywords-in-c-sharp/)
 
 ### Tasks - Week 1 
 - [x] Explain namespaces, adding static methods
