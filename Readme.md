@@ -1,7 +1,7 @@
 ﻿
 **For a markdown cheat sheet see [Markdown Cheat Sheet](https://www.markdownguide.org/cheat-sheet/)**
 
-## 3D Game Engine Development - [Getting Started](https://github.com/nmcguinness/GD3_2_Getting_Started.git)
+## 3D Game Engine Development - [Intro to MonoGame](https://github.com/nmcguinness/GD3_3_Intro_To_MonoGame.git)
 
 ### Further Reading
 

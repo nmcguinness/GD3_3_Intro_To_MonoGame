@@ -8,5 +8,7 @@
         WireframeRectangle, WireframeCircle, WireframeCube
 
         #endregion Wireframe - Use when creating VertexPositionColor vertices
+
+        //TODO - what other primitives can we create?
     }
 }
