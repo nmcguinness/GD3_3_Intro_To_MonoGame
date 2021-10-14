@@ -56,6 +56,10 @@ namespace GDLibrary.Factory
                         vertexData = GetLineData();
                         break;
 
+                    case VertexDataType.WireframeRectangle;
+                        vertexData = GetWireframeRectangleData();
+                        break;
+
                     //TODO - Add more (1) VertexDataTypes and (2) method to return the IVertexData
 
                     default:
