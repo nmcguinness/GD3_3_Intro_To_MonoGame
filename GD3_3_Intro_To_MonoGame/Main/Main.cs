@@ -27,6 +27,8 @@ namespace GDLibrary
         private float rotationInDegrees = 0;
         private Vector3 translation = Vector3.Zero;
         private IVertexData xAxisVertexData;
+        private IVertexData yAxisVertexData;
+        private IVertexData zAxisVertexData;
 
         #endregion Member Variables
 
@@ -95,6 +97,8 @@ namespace GDLibrary
         private void InitializeVertices()
         {
             xAxisVertexData = VertexDataFactory.Get(VertexDataType.Line);
+            yAxisVertexData = VertexDataFactory.Get(VertexDataType.Line);
+            zAxisVertexData = VertexDataFactory.Get(VertexDataType.Line);
         }
 
         #endregion Initialization
@@ -134,6 +138,20 @@ namespace GDLibrary
 
             //draw the IVertexData object (e.g. x-axis line)
             xAxisVertexData.Draw(gameTime, effect);
+
+            //draw y-axis line
+            effect.World = Matrix.Identity *
+                Matrix.CreateRotationZ(MathHelper.PiOver2);
+            //load the variables (W,V,P) for use in the next draw pass
+            effect.CurrentTechnique.Passes[0].Apply();
+            yAxisVertexData.Draw(gameTime, effect);
+
+            //draw z-axis line
+            effect.World = Matrix.Identity *
+                Matrix.CreateRotationY(MathHelper.PiOver2);
+            //load the variables (W,V,P) for use in the next draw pass
+            effect.CurrentTechnique.Passes[0].Apply();
+            zAxisVertexData.Draw(gameTime, effect);
 
             base.Draw(gameTime);
         }

@@ -23,7 +23,8 @@ namespace GDLibrary.Factory
         /// <summary>
         /// a dictionary (e.g. HashMap in Java) that stores a reference to any new vertex data object for efficient re-use
         /// </summary>
-        private static Dictionary<VertexDataType, IVertexData> vertexDataDictionary
+        private static Dictionary<VertexDataType, IVertexData>
+            vertexDataDictionary
             = new Dictionary<VertexDataType, IVertexData>();
 
         #endregion Member Variables
