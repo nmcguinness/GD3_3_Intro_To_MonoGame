@@ -56,7 +56,7 @@ namespace GDLibrary.Factory
                         vertexData = GetLineData();
                         break;
 
-                    case VertexDataType.WireframeRectangle;
+                    case VertexDataType.WireframeRectangle:
                         vertexData = GetWireframeRectangleData();
                         break;
 
@@ -107,7 +107,21 @@ namespace GDLibrary.Factory
 
         private static IVertexData GetWireframeCubeData()
         {
-            throw new NotImplementedException();
+            ///a cube has 12 lines so 24 verts
+            VertexPositionColor[] vertices
+                = new VertexPositionColor[24];
+
+            float halfSize = 0.5f;
+            //top
+
+            //left
+            vertices[0] = new VertexPositionColor(
+                new Vector3(-halfSize, halfSize, -halfSize),
+                Color.White);
+
+            //bottom
+
+            //sides
         }
 
         #endregion Get Vertex Data for each primitive
