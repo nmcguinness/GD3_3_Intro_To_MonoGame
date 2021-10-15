@@ -83,10 +83,46 @@ namespace GDLibrary.Factory
 
         private static IVertexData GetFilledQuadData()
         {
+            float halfWidth = 0.5f;
             VertexPositionColor[] vertices = new VertexPositionColor[6];
-            //...
+
+            #region Triangle - Top
+
+            //top left
+            vertices[0] = new VertexPositionColor(
+                new Vector3(-halfWidth, halfWidth, 0), Color.Red);
+
+            //top right
+            vertices[1] = new VertexPositionColor(
+                new Vector3(halfWidth, halfWidth, 0), Color.Green);
+
+            //bottom left
+            vertices[2] = new VertexPositionColor(
+                new Vector3(-halfWidth, -halfWidth, 0), Color.Blue);
+
+            #endregion Triangle - Top
+
+            #region Triangle - Bottom
+
+            //top right
+            vertices[3] = new VertexPositionColor(
+                new Vector3(halfWidth, halfWidth, 0), Color.Orange);
+
+            //bottom right
+            vertices[4] = new VertexPositionColor(
+                new Vector3(halfWidth, -halfWidth, 0), Color.Yellow);
+
+            //bottom left
+            vertices[5] = new VertexPositionColor(
+                new Vector3(-halfWidth, -halfWidth, 0), Color.Pink);
+
+            #endregion Triangle - Bottom
+
+            return new VertexData<VertexPositionColor>(
+                PrimitiveType.TriangleList, vertices, 0, 2);
         }
 
+        //TODO - move to centre around the origin
         private static IVertexData GetFilledTriangleData()
         {
             VertexPositionColor[] vertices = new VertexPositionColor[3];
