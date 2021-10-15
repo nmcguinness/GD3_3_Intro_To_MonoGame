@@ -83,7 +83,8 @@ namespace GDLibrary.Factory
 
         private static IVertexData GetFilledQuadData()
         {
-            throw new NotImplementedException();
+            VertexPositionColor[] vertices = new VertexPositionColor[6];
+            //...
         }
 
         private static IVertexData GetFilledTriangleData()
