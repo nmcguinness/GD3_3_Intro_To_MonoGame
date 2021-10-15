@@ -79,7 +79,23 @@ namespace GDLibrary.Factory
 
         private static IVertexData GetFilledTriangleData()
         {
-            throw new NotImplementedException();
+            VertexPositionColor[] vertices = new VertexPositionColor[3];
+
+            //apex
+            vertices[0] = new VertexPositionColor(
+                new Vector3(0, 1, 0), Color.Red);
+
+            //bottom right
+            vertices[1] = new VertexPositionColor(
+                new Vector3(1, 0, 0), Color.Green);
+
+            //bottom left
+            vertices[2] = new VertexPositionColor(
+                new Vector3(-1, 0, 0), Color.Blue);
+
+            return new VertexData<VertexPositionColor>(
+                PrimitiveType.TriangleList, vertices,
+                0, 1);
         }
 
         #region Get Vertex Data for each primitive
