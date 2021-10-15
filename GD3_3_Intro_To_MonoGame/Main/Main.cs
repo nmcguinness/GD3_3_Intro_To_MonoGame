@@ -128,7 +128,9 @@ namespace GDLibrary
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             //set variables on the shader
-            effect.World = Matrix.Identity;
+            effect.World = Matrix.Identity
+                * Matrix.CreateScale(new Vector3(2, 1.5f, 1));
+
             effect.View = view;
             effect.Projection = projection;
 

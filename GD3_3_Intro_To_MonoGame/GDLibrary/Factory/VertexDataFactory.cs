@@ -64,6 +64,10 @@ namespace GDLibrary.Factory
                         vertexData = GetFilledTriangleData();
                         break;
 
+                    case VertexDataType.FilledQuad:
+                        vertexData = GetFilledQuadData();
+                        break;
+
                     //TODO - Add more (1) VertexDataTypes and (2) method to return the IVertexData
 
                     default:
@@ -75,6 +79,11 @@ namespace GDLibrary.Factory
             }
 
             return vertexDataDictionary[vertexDataType];
+        }
+
+        private static IVertexData GetFilledQuadData()
+        {
+            throw new NotImplementedException();
         }
 
         private static IVertexData GetFilledTriangleData()
