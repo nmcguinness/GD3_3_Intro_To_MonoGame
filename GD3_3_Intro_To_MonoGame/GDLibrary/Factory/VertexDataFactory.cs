@@ -86,43 +86,136 @@ namespace GDLibrary.Factory
             vertices[0] = new VertexPositionColor(-Vector3.UnitX, Color.White);
             vertices[1] = new VertexPositionColor(Vector3.UnitX, Color.White);
 
-            return new VertexData<VertexPositionColor>(vertices,
-                 PrimitiveType.LineList, 1, 0);
+            return new VertexData<VertexPositionColor>(PrimitiveType.LineList, vertices,
+                             0, 1);
         }
 
         private static IVertexData GetOriginData()
         {
-            throw new NotImplementedException();
+            VertexPositionColor[] vertices = new VertexPositionColor[20];
+
+            //x-axis
+            vertices[0] = new VertexPositionColor(-Vector3.UnitX, Color.DarkRed);
+            vertices[1] = new VertexPositionColor(Vector3.UnitX, Color.DarkRed);
+
+            //y-axis
+            vertices[2] = new VertexPositionColor(-Vector3.UnitY, Color.DarkGreen);
+            vertices[3] = new VertexPositionColor(Vector3.UnitY, Color.DarkGreen);
+
+            //z-axis
+            vertices[4] = new VertexPositionColor(-Vector3.UnitZ, Color.DarkBlue);
+            vertices[5] = new VertexPositionColor(Vector3.UnitZ, Color.DarkBlue);
+
+            //to do - x-text , y-text, z-text
+            //x label
+            vertices[6] = new VertexPositionColor(new Vector3(1.1f, 0.1f, 0), Color.DarkRed);
+            vertices[7] = new VertexPositionColor(new Vector3(1.3f, -0.1f, 0), Color.DarkRed);
+            vertices[8] = new VertexPositionColor(new Vector3(1.3f, 0.1f, 0), Color.DarkRed);
+            vertices[9] = new VertexPositionColor(new Vector3(1.1f, -0.1f, 0), Color.DarkRed);
+
+            //y label
+            vertices[10] = new VertexPositionColor(new Vector3(-0.1f, 1.3f, 0), Color.DarkGreen);
+            vertices[11] = new VertexPositionColor(new Vector3(0, 1.2f, 0), Color.DarkGreen);
+            vertices[12] = new VertexPositionColor(new Vector3(0.1f, 1.3f, 0), Color.DarkGreen);
+            vertices[13] = new VertexPositionColor(new Vector3(-0.1f, 1.1f, 0), Color.DarkGreen);
+
+            //z label
+            vertices[14] = new VertexPositionColor(new Vector3(0, 0.1f, 1.1f), Color.DarkBlue);
+            vertices[15] = new VertexPositionColor(new Vector3(0, 0.1f, 1.3f), Color.DarkBlue);
+            vertices[16] = new VertexPositionColor(new Vector3(0, 0.1f, 1.1f), Color.DarkBlue);
+            vertices[17] = new VertexPositionColor(new Vector3(0, -0.1f, 1.3f), Color.DarkBlue);
+            vertices[18] = new VertexPositionColor(new Vector3(0, -0.1f, 1.3f), Color.DarkBlue);
+            vertices[19] = new VertexPositionColor(new Vector3(0, -0.1f, 1.1f), Color.DarkBlue);
+
+            return new VertexData<VertexPositionColor>(PrimitiveType.LineList, vertices,
+                             0, 10);
         }
 
         private static IVertexData GetWireframeRectangleData()
         {
-            throw new NotImplementedException();
-        }
+            VertexPositionColor[] vertices
+                = new VertexPositionColor[5];
 
-        private static IVertexData GetWireframeCircleData()
-        {
-            throw new NotImplementedException();
+            //top left vertex
+            vertices[0] = new VertexPositionColor(
+                new Vector3(-0.5f, 0.5f, 0), Color.White);
+
+            //top right vertex
+            vertices[1] = new VertexPositionColor(
+                new Vector3(0.5f, 0.5f, 0), Color.White);
+
+            //bottom right vertex
+            vertices[2] = new VertexPositionColor(
+                new Vector3(0.5f, -0.5f, 0), Color.White);
+
+            //bottom left vertex
+            vertices[3] = new VertexPositionColor(
+                new Vector3(-0.5f, -0.5f, 0), Color.White);
+
+            //top left vertex to close the rectangle
+            vertices[4] = new VertexPositionColor(
+                new Vector3(-0.5f, 0.5f, 0), Color.White);
+
+            return new VertexData<VertexPositionColor>(
+                PrimitiveType.LineStrip, vertices,
+                0, 4);
         }
 
         private static IVertexData GetWireframeCubeData()
         {
-            ///a cube has 12 lines so 24 verts
-            VertexPositionColor[] vertices
-                = new VertexPositionColor[24];
+            throw new NotImplementedException();
+            /////a cube has 12 lines so 24 verts
+            //VertexPositionColor[] vertices
+            //    = new VertexPositionColor[24];
 
-            float halfSize = 0.5f;
-            //top
+            //float halfSize = 0.5f;
+            ////top
 
-            //left
-            vertices[0] = new VertexPositionColor(
-                new Vector3(-halfSize, halfSize, -halfSize),
-                Color.White);
+            ////left
+            //vertices[0] = new VertexPositionColor(
+            //    new Vector3(-halfSize, halfSize, -halfSize),
+            //    Color.White);
 
             //bottom
 
             //sides
         }
+
+        //public static IVertexData GetWireframeCircleData()
+        //{
+        //    int radius = 1;
+        //    int sweepAngleInDegrees = 45;
+
+        //    //sweep angle should also be >= 1 and a multiple of 360
+        //    //if angle is not a multiple of 360 the circle will not close - remember we are drawing with a LineStrip
+        //    if ((sweepAngleInDegrees < 1) || (360 % sweepAngleInDegrees != 0))
+        //    {
+        //        return null;
+        //    }
+
+        //    //number of segments forming the circle (e.g. for sweepAngleInDegrees == 90 we have 4 segments)
+        //    int segmentCount = 360 / sweepAngleInDegrees;
+
+        //    //segment angle
+        //    float rads = MathHelper.ToRadians(sweepAngleInDegrees);
+
+        //    //we need one more vertex to close the circle (e.g. 4 + 1 vertices to draw four lines)
+        //    VertexPositionColor[] vertices = new VertexPositionColor[segmentCount + 1];
+
+        //    float a, b;
+
+        //    for (int i = 0; i < vertices.Length; i++)
+        //    {
+        //        //round the values so we dont end up with the two oordinate values very close to but not equals to 0
+        //        a = (float)(radius * Math.Round(Math.Cos(rads * i), 2));
+        //        b = (float)(radius * Math.Round(Math.Sin(rads * i), 2));
+
+        //        vertices[i] = new VertexPositionColor(new Vector3(a, b, 0), Color.White);
+        //    }
+
+        //    return new VertexData<VertexPositionColor>(PrimitiveType.LineStrip, vertices,
+        //                   0, vertices.Length - 1);
+        //}
 
         #endregion Get Vertex Data for each primitive
     }

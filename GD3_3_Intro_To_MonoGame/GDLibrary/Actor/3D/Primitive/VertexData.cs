@@ -14,12 +14,14 @@ namespace GDLibrary.Actor
         //TODO - get set?
         private int vertexOffset;
 
-        public VertexData(T[] vertices, PrimitiveType primitiveType, int primitiveCount, int vertexOffset)
+        public VertexData(PrimitiveType primitiveType, T[] vertices,
+            int vertexOffset, int primitiveCount)
         {
-            this.vertices = vertices;
             this.primitiveType = primitiveType;
-            this.primitiveCount = primitiveCount;
+            this.vertices = vertices;
+
             this.vertexOffset = vertexOffset;
+            this.primitiveCount = primitiveCount;
         }
 
         public object Clone()
@@ -29,8 +31,8 @@ namespace GDLibrary.Actor
 
         public object DeepClone()
         {
-            return new VertexData<T>(vertices, primitiveType,
-                primitiveCount, vertexOffset);
+            return new VertexData<T>(primitiveType, vertices, vertexOffset,
+                primitiveCount);
         }
 
         public void Draw(GameTime gameTime, BasicEffect effect)
