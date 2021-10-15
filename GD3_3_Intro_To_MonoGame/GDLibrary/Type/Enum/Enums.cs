@@ -11,8 +11,7 @@
 
         #region Filled
 
-        FilledTriangle, FilledQuad
-        //FilledButterfly
+        FilledTriangle, FilledQuad, FilledButterfly
 
         #endregion Filled
     }

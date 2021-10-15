@@ -68,7 +68,9 @@ namespace GDLibrary.Factory
                         vertexData = GetFilledQuadData();
                         break;
 
-                    //TODO - Add more (1) VertexDataTypes and (2) method to return the IVertexData
+                    case VertexDataType.FilledButterfly:
+                        vertexData = GetFilledButterflyData();
+                        break;
 
                     default:
                         break;
@@ -79,6 +81,34 @@ namespace GDLibrary.Factory
             }
 
             return vertexDataDictionary[vertexDataType];
+        }
+
+        private static IVertexData GetFilledButterflyData()
+        {
+            VertexPositionColor[] vertices = new VertexPositionColor[6];
+
+            //top left
+            vertices[0] = new VertexPositionColor(
+               new Vector3(-1, 1, 0), Color.Red);
+            //origin
+            vertices[1] = new VertexPositionColor(
+               Vector3.Zero, Color.Green);
+            //bottom left
+            vertices[2] = new VertexPositionColor(
+               new Vector3(-1, -1, 0), Color.Blue);
+
+            //top right
+            vertices[3] = new VertexPositionColor(
+              new Vector3(1, 1, 0), Color.Red);
+            //bottom left
+            vertices[4] = new VertexPositionColor(
+               new Vector3(1, -1, 0), Color.Blue);
+            //origin
+            vertices[5] = new VertexPositionColor(
+               Vector3.Zero, Color.Green);
+
+            return new VertexData<VertexPositionColor>(
+    PrimitiveType.TriangleList, vertices, 0, 2);
         }
 
         private static IVertexData GetFilledQuadData()

@@ -97,7 +97,7 @@ namespace GDLibrary
         private void InitializeVertices()
         {
             vertexData = VertexDataFactory.Get(
-                VertexDataType.FilledQuad);
+                VertexDataType.FilledButterfly);
         }
 
         #endregion Initialization
