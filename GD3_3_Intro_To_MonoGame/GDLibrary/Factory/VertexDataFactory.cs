@@ -60,6 +60,10 @@ namespace GDLibrary.Factory
                         vertexData = GetWireframeRectangleData();
                         break;
 
+                    case VertexDataType.FilledTriangle:
+                        vertexData = GetFilledTriangleData();
+                        break;
+
                     //TODO - Add more (1) VertexDataTypes and (2) method to return the IVertexData
 
                     default:
@@ -71,6 +75,11 @@ namespace GDLibrary.Factory
             }
 
             return vertexDataDictionary[vertexDataType];
+        }
+
+        private static IVertexData GetFilledTriangleData()
+        {
+            throw new NotImplementedException();
         }
 
         #region Get Vertex Data for each primitive

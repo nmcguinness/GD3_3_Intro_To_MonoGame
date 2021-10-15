@@ -135,7 +135,7 @@ namespace GDLibrary
             //load the variables (W,V,P) for use in the next draw pass
             effect.CurrentTechnique.Passes[0].Apply();
 
-            ////draw the IVertexData object (e.g. x-axis line)
+            //draw the IVertexData object (e.g. x-axis line)
             vertexData.Draw(gameTime, effect);
 
             base.Draw(gameTime);
