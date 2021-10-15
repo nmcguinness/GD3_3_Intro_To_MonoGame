@@ -120,6 +120,7 @@ namespace GDLibrary
 
         protected override void Update(GameTime gameTime)
         {
+            rotationInDegrees += 3;
             base.Update(gameTime);
         }
 
@@ -129,7 +130,9 @@ namespace GDLibrary
 
             //set variables on the shader
             effect.World = Matrix.Identity
-                * Matrix.CreateScale(new Vector3(2, 1.5f, 1));
+                * Matrix.CreateRotationY(
+                    MathHelper.ToRadians(rotationInDegrees))
+                * Matrix.CreateScale(new Vector3(2, 2, 1));
 
             effect.View = view;
             effect.Projection = projection;
