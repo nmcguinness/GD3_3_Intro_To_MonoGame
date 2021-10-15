@@ -26,7 +26,7 @@ namespace GDLibrary
         private VertexPositionColor[] vertices;
         private float rotationInDegrees = 0;
         private Vector3 translation = Vector3.Zero;
-        private IVertexData xAxisVertexData;
+        private IVertexData vertexData;
         private IVertexData yAxisVertexData;
         private IVertexData zAxisVertexData;
 
@@ -96,9 +96,8 @@ namespace GDLibrary
 
         private void InitializeVertices()
         {
-            //xAxisVertexData = VertexDataFactory.Get(VertexDataType.Line);
-            //yAxisVertexData = VertexDataFactory.Get(VertexDataType.Line);
-            //zAxisVertexData = VertexDataFactory.Get(VertexDataType.Line);
+            vertexData = VertexDataFactory.Get(
+                VertexDataType.WireframeRectangle);
         }
 
         #endregion Initialization
@@ -137,21 +136,7 @@ namespace GDLibrary
             effect.CurrentTechnique.Passes[0].Apply();
 
             ////draw the IVertexData object (e.g. x-axis line)
-            //xAxisVertexData.Draw(gameTime, effect);
-
-            ////draw y-axis line
-            //effect.World = Matrix.Identity *
-            //    Matrix.CreateRotationZ(MathHelper.PiOver2);
-            ////load the variables (W,V,P) for use in the next draw pass
-            //effect.CurrentTechnique.Passes[0].Apply();
-            //yAxisVertexData.Draw(gameTime, effect);
-
-            ////draw z-axis line
-            //effect.World = Matrix.Identity *
-            //    Matrix.CreateRotationY(MathHelper.PiOver2);
-            ////load the variables (W,V,P) for use in the next draw pass
-            //effect.CurrentTechnique.Passes[0].Apply();
-            //zAxisVertexData.Draw(gameTime, effect);
+            vertexData.Draw(gameTime, effect);
 
             base.Draw(gameTime);
         }
