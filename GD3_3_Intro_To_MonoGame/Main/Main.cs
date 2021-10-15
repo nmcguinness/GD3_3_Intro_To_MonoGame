@@ -97,7 +97,7 @@ namespace GDLibrary
         private void InitializeVertices()
         {
             vertexData = VertexDataFactory.Get(
-                VertexDataType.FilledButterfly);
+                VertexDataType.FilledDiamond);
         }
 
         #endregion Initialization
@@ -121,17 +121,22 @@ namespace GDLibrary
         protected override void Update(GameTime gameTime)
         {
             rotationInDegrees += 3;
+            rotationInDegrees %= 360;
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
+            //Add a squidgy (periodic compression on 1 axis) rotating primitive
+            // Math?
+            // gameTime.TotalGameTime.TotalMilliseconds
+
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             //set variables on the shader
             effect.World = Matrix.Identity
                 * Matrix.CreateRotationY(
-                    MathHelper.ToRadians(rotationInDegrees))
+                    MathHelper.ToRadians(0))
                 * Matrix.CreateScale(new Vector3(2, 2, 1));
 
             effect.View = view;

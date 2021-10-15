@@ -72,6 +72,10 @@ namespace GDLibrary.Factory
                         vertexData = GetFilledButterflyData();
                         break;
 
+                    case VertexDataType.FilledDiamond:
+                        vertexData = GetFilledDiamondData();
+                        break;
+
                     default:
                         break;
                 }
@@ -81,6 +85,30 @@ namespace GDLibrary.Factory
             }
 
             return vertexDataDictionary[vertexDataType];
+        }
+
+        private static IVertexData GetFilledDiamondData()
+        {
+            VertexPositionColor[] vertices = new VertexPositionColor[4];
+
+            //top apex
+            vertices[0] = new VertexPositionColor(
+               new Vector3(0, 1, 0), Color.Red);
+
+            //side right
+            vertices[1] = new VertexPositionColor(
+               new Vector3(1, 0, 0), Color.Green);
+
+            //side left
+            vertices[2] = new VertexPositionColor(
+               new Vector3(-1, 0, 0), Color.Blue);
+
+            //bottom apex
+            vertices[3] = new VertexPositionColor(
+              new Vector3(0, -1, 0), Color.Red);
+
+            return new VertexData<VertexPositionColor>(
+                    PrimitiveType.TriangleStrip, vertices, 0, 2);
         }
 
         private static IVertexData GetFilledButterflyData()
