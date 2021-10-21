@@ -94,8 +94,8 @@ namespace GDLibrary
                 cameraTarget, cameraUp);
 
             float fieldOfView = (float)Math.PI / 2.0f;
-            float aspectRatio = (float)_graphics.PreferredBackBufferWidth 
-                / _graphics.PreferredBackBufferHeight; 
+            float aspectRatio = (float)_graphics.PreferredBackBufferWidth
+                / _graphics.PreferredBackBufferHeight;
             float nearPlaneDistance = 0.1f;
             float farPlaneDistance = 1000;
 
@@ -148,14 +148,10 @@ namespace GDLibrary
             base.Update(gameTime);
         }
 
-        protected override void Draw(GameTime gameTime)
+        private void Draw(Matrix world, Matrix view, Matrix projection,
+            BasicEffect effect, Texture2D texture,
+            IVertexData vertexData)
         {
-            //Add a squidgy (periodic compression on 1 axis) rotating primitive
-            // Math?
-            // gameTime.TotalGameTime.TotalMilliseconds
-
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
             //set variables on the shader
             texturedEffect.World = Matrix.Identity
                 * Matrix.CreateRotationY(
@@ -171,21 +167,11 @@ namespace GDLibrary
 
             //draw the IVertexData object (e.g. x-axis line)
             vertexData.Draw(gameTime, texturedEffect);
+        }
 
-            ////set variables on the shader
-            //effect.World = Matrix.Identity
-            //    * Matrix.CreateRotationY(
-            //        MathHelper.ToRadians(0))
-            //    * Matrix.CreateScale(new Vector3(2, 2, 1));
-
-            //effect.View = view;
-            //effect.Projection = projection;
-
-            ////load the variables (W,V,P) for use in the next draw pass
-            //effect.CurrentTechnique.Passes[0].Apply();
-
-            ////draw the IVertexData object (e.g. x-axis line)
-            //vertexData.Draw(gameTime, effect);
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
             base.Draw(gameTime);
         }
