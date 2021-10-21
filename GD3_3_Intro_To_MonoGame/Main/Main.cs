@@ -30,8 +30,10 @@ namespace GDLibrary
         private IVertexData yAxisVertexData;
         private IVertexData zAxisVertexData;
         private BasicEffect texturedEffect;
-        private Texture2D crateTexture;
-        private int worldScale = 200;
+        private Texture2D skyboxBackTexture;
+        private Texture2D skyboxLeftTexture;
+        private Texture2D skyboxRightTexture;
+        private int worldScale = 400;
 
         #endregion Member Variables
 
@@ -68,9 +70,17 @@ namespace GDLibrary
 
         private void LoadTextures()
         {
-            crateTexture
+            skyboxBackTexture
             = Content.Load<Texture2D>(
                 "Assets/Textures/Skybox/back");
+
+            skyboxLeftTexture
+            = Content.Load<Texture2D>(
+              "Assets/Textures/Skybox/left");
+
+            skyboxRightTexture
+            = Content.Load<Texture2D>(
+            "Assets/Textures/Skybox/right");
         }
 
         private void InitializeResolution(int width, int height)
@@ -171,20 +181,24 @@ namespace GDLibrary
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            //back
             Draw(gameTime,
                 Matrix.Identity
                 * Matrix.CreateScale(new Vector3(worldScale, worldScale, 1))
                 * Matrix.CreateTranslation(new Vector3(0, 0, -worldScale / 2)),
                 view, projection,
                 texturedEffect,
-                crateTexture, vertexData);
+                skyboxBackTexture, vertexData);
 
+            //left
             Draw(gameTime,
                 Matrix.Identity
-                * Matrix.CreateTranslation(new Vector3(3, 0, 0)),
-            view, projection,
-            texturedEffect,
-            crateTexture, vertexData);
+                * Matrix.CreateScale(new Vector3(worldScale, worldScale, 1))
+                * Matrix.CreateRotationY(MathHelper.ToRadians(90))
+                * Matrix.CreateTranslation(new Vector3(-worldScale / 2, 0, 0)),
+                view, projection,
+                texturedEffect,
+                skyboxLeftTexture, vertexData);
 
             base.Draw(gameTime);
         }
