@@ -154,16 +154,16 @@ namespace GDLibrary
             IVertexData vertexData)
         {
             //set variables on the shader
-            texturedEffect.World = world;
-            texturedEffect.View = view;
-            texturedEffect.Projection = projection;
-            texturedEffect.Texture = texture;
+            effect.World = world;
+            effect.View = view;
+            effect.Projection = projection;
+            effect.Texture = texture;
 
             //load the variables (W,V,P) for use in the next draw pass
-            texturedEffect.CurrentTechnique.Passes[0].Apply();
+            effect.CurrentTechnique.Passes[0].Apply();
 
             //draw the IVertexData object (e.g. x-axis line)
-            vertexData.Draw(gameTime, texturedEffect);
+            vertexData.Draw(gameTime, effect);
         }
 
         protected override void Draw(GameTime gameTime)
@@ -174,6 +174,12 @@ namespace GDLibrary
                 view, projection,
                 texturedEffect,
                 crateTexture, vertexData);
+
+            Draw(gameTime,
+                Matrix.Identity * Matrix.CreateTranslation(new Vector3(3, 0, 0)),
+            view, projection,
+            texturedEffect,
+            crateTexture, vertexData);
 
             base.Draw(gameTime);
         }
