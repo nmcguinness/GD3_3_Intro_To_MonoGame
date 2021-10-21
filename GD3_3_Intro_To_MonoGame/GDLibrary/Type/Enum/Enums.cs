@@ -12,8 +12,15 @@
         #region Filled
 
         FilledTriangle, FilledQuad,
-        FilledButterfly, FilledDiamond
+        FilledButterfly, FilledDiamond,
 
         #endregion Filled
+
+        #region Textured
+
+        TexturedQuad
+
+        #endregion Textured
+
     }
 }

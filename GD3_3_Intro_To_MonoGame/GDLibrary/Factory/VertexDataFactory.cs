@@ -76,6 +76,10 @@ namespace GDLibrary.Factory
                         vertexData = GetFilledDiamondData();
                         break;
 
+                    case VertexDataType.TexturedQuad:
+                        vertexData = GetTexturedQuadData();
+                        break;
+
                     default:
                         break;
                 }
@@ -85,6 +89,32 @@ namespace GDLibrary.Factory
             }
 
             return vertexDataDictionary[vertexDataType];
+        }
+
+        private static IVertexData GetTexturedQuadData()
+        {
+            VertexPositionColorTexture[] vertices
+                = new VertexPositionColorTexture[4];
+
+            //top left
+            vertices[0] = new VertexPositionColorTexture(
+               new Vector3(-0.5f, 0.5f, 0), Color.White,
+               new Vector2(0, 0));
+
+            //top right
+            vertices[1] = new VertexPositionColorTexture(
+                       new Vector3(0.5f, 0.5f, 0), Color.White,
+                       new Vector2(1, 0));
+
+            //bottom left
+            vertices[1] = new VertexPositionColorTexture(
+                       new Vector3(-0.5f, -0.5f, 0), Color.White,
+                       new Vector2(0, 1));
+
+            //bottom apex
+            vertices[2] = new VertexPositionColorTexture(
+                          new Vector3(0.5f, -0.5f, 0), Color.White,
+                          new Vector2(1, 1));
         }
 
         private static IVertexData GetFilledDiamondData()
