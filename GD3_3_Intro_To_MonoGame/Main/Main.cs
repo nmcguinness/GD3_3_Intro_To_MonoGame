@@ -29,6 +29,8 @@ namespace GDLibrary
         private IVertexData vertexData;
         private IVertexData yAxisVertexData;
         private IVertexData zAxisVertexData;
+        private BasicEffect texturedEffect;
+        private Texture2D crateTexture;
 
         #endregion Member Variables
 
@@ -53,7 +55,20 @@ namespace GDLibrary
             InitializeCamera();
             IntializeEffect();
             InitializeVertices();
+            LoadAssets();
+
             base.Initialize();
+        }
+
+        private void LoadAssets()
+        {
+            LoadTextures();
+        }
+
+        private void LoadTextures()
+        {
+            crateTexture
+            = Content.Load<Texture2D>("Assets/Textures/Props/Crates/crate1");
         }
 
         private void InitializeResolution(int width, int height)
@@ -89,15 +104,21 @@ namespace GDLibrary
 
         private void IntializeEffect()
         {
-            //default shader provided by MonoGame
+            //wireframe, filled triangles
             effect = new BasicEffect(_graphics.GraphicsDevice);
             effect.VertexColorEnabled = true;
+
+            //textured unlit
+            texturedEffect = new BasicEffect(_graphics.GraphicsDevice);
+            texturedEffect.TextureEnabled = true;
+
+            //textured lit
         }
 
         private void InitializeVertices()
         {
             vertexData = VertexDataFactory.Get(
-                VertexDataType.FilledDiamond);
+                VertexDataType.TexturedQuad);
         }
 
         #endregion Initialization
@@ -134,19 +155,35 @@ namespace GDLibrary
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             //set variables on the shader
-            effect.World = Matrix.Identity
+            texturedEffect.World = Matrix.Identity
                 * Matrix.CreateRotationY(
                     MathHelper.ToRadians(0))
                 * Matrix.CreateScale(new Vector3(2, 2, 1));
 
-            effect.View = view;
-            effect.Projection = projection;
+            texturedEffect.View = view;
+            texturedEffect.Projection = projection;
+            texturedEffect.Texture = crateTexture;
 
             //load the variables (W,V,P) for use in the next draw pass
-            effect.CurrentTechnique.Passes[0].Apply();
+            texturedEffect.CurrentTechnique.Passes[0].Apply();
 
             //draw the IVertexData object (e.g. x-axis line)
-            vertexData.Draw(gameTime, effect);
+            vertexData.Draw(gameTime, texturedEffect);
+
+            ////set variables on the shader
+            //effect.World = Matrix.Identity
+            //    * Matrix.CreateRotationY(
+            //        MathHelper.ToRadians(0))
+            //    * Matrix.CreateScale(new Vector3(2, 2, 1));
+
+            //effect.View = view;
+            //effect.Projection = projection;
+
+            ////load the variables (W,V,P) for use in the next draw pass
+            //effect.CurrentTechnique.Passes[0].Apply();
+
+            ////draw the IVertexData object (e.g. x-axis line)
+            //vertexData.Draw(gameTime, effect);
 
             base.Draw(gameTime);
         }

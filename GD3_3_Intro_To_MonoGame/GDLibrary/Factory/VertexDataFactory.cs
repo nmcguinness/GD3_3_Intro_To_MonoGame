@@ -107,14 +107,17 @@ namespace GDLibrary.Factory
                        new Vector2(1, 0));
 
             //bottom left
-            vertices[1] = new VertexPositionColorTexture(
+            vertices[2] = new VertexPositionColorTexture(
                        new Vector3(-0.5f, -0.5f, 0), Color.White,
                        new Vector2(0, 1));
 
             //bottom apex
-            vertices[2] = new VertexPositionColorTexture(
+            vertices[3] = new VertexPositionColorTexture(
                           new Vector3(0.5f, -0.5f, 0), Color.White,
                           new Vector2(1, 1));
+
+            return new VertexData<VertexPositionColorTexture>(
+                 PrimitiveType.TriangleStrip, vertices, 0, 2);
         }
 
         private static IVertexData GetFilledDiamondData()
