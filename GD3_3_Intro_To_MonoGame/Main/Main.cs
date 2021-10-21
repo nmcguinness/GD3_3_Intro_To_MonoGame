@@ -148,19 +148,16 @@ namespace GDLibrary
             base.Update(gameTime);
         }
 
-        private void Draw(Matrix world, Matrix view, Matrix projection,
+        private void Draw(GameTime gameTime,
+            Matrix world, Matrix view, Matrix projection,
             BasicEffect effect, Texture2D texture,
             IVertexData vertexData)
         {
             //set variables on the shader
-            texturedEffect.World = Matrix.Identity
-                * Matrix.CreateRotationY(
-                    MathHelper.ToRadians(0))
-                * Matrix.CreateScale(new Vector3(2, 2, 1));
-
+            texturedEffect.World = world;
             texturedEffect.View = view;
             texturedEffect.Projection = projection;
-            texturedEffect.Texture = crateTexture;
+            texturedEffect.Texture = texture;
 
             //load the variables (W,V,P) for use in the next draw pass
             texturedEffect.CurrentTechnique.Passes[0].Apply();
@@ -172,6 +169,11 @@ namespace GDLibrary
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            Draw(gameTime, Matrix.Identity,
+                view, projection,
+                texturedEffect,
+                crateTexture, vertexData);
 
             base.Draw(gameTime);
         }
