@@ -68,7 +68,8 @@ namespace GDLibrary
         private void LoadTextures()
         {
             crateTexture
-            = Content.Load<Texture2D>("Assets/Textures/Props/Crates/crate1");
+            = Content.Load<Texture2D>(
+                "Assets/Textures/Props/Crates/crate1");
         }
 
         private void InitializeResolution(int width, int height)
@@ -93,7 +94,8 @@ namespace GDLibrary
                 cameraTarget, cameraUp);
 
             float fieldOfView = (float)Math.PI / 2.0f;
-            float aspectRatio = 16 / 10.0f; // 1.6f; // 1920/1080.0f;
+            float aspectRatio = (float)_graphics.PreferredBackBufferWidth 
+                / _graphics.PreferredBackBufferHeight; 
             float nearPlaneDistance = 0.1f;
             float farPlaneDistance = 1000;
 
