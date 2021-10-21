@@ -31,6 +31,7 @@ namespace GDLibrary
         private IVertexData zAxisVertexData;
         private BasicEffect texturedEffect;
         private Texture2D crateTexture;
+        private int worldScale = 200;
 
         #endregion Member Variables
 
@@ -69,7 +70,7 @@ namespace GDLibrary
         {
             crateTexture
             = Content.Load<Texture2D>(
-                "Assets/Textures/Props/Crates/crate1");
+                "Assets/Textures/Skybox/back");
         }
 
         private void InitializeResolution(int width, int height)
@@ -170,13 +171,17 @@ namespace GDLibrary
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            Draw(gameTime, Matrix.Identity,
+            Draw(gameTime,
+                Matrix.Identity
+                * Matrix.CreateScale(new Vector3(worldScale, worldScale, 1))
+                * Matrix.CreateTranslation(new Vector3(0, 0, -worldScale / 2)),
                 view, projection,
                 texturedEffect,
                 crateTexture, vertexData);
 
             Draw(gameTime,
-                Matrix.Identity * Matrix.CreateTranslation(new Vector3(3, 0, 0)),
+                Matrix.Identity
+                * Matrix.CreateTranslation(new Vector3(3, 0, 0)),
             view, projection,
             texturedEffect,
             crateTexture, vertexData);
